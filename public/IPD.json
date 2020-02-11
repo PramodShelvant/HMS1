@@ -1,0 +1,52 @@
+{
+    "data":[
+        {
+        "name":"abc",
+        "patientid":"123",
+        "gender":"male",
+        "phone":9876543210,
+        "consultant":"dr.thapa",
+        "bed":6,
+        "charges":45678,
+        "payment":50000,
+        "duepayment":3000,
+        "creditlimit":20000
+                
+    },
+    {
+        "name":"abc",
+        "patientid":"123",
+        "gender":"male",
+        "phone":9876543210,
+        "consultant":"dr.thapa",
+        "bed":6,
+        "charges":45678,
+        "payment":50000,
+        "duepayment":3000,
+        "creditlimit":20000    },
+    {
+        "name":"abc",
+        "patientid":"123",
+        "gender":"male",
+        "phone":9876543210,
+        "consultant":"dr.thapa",
+        "bed":6,
+        "charges":45678,
+        "payment":50000,
+        "duepayment":3000,
+        "creditlimit":20000
+    },
+    {
+        "name":"abc",
+        "patientid":"123",
+        "gender":"male",
+        "phone":9876543210,
+        "consultant":"dr.thapa",
+        "bed":6,
+        "charges":45678,
+        "payment":50000,
+        "duepayment":3000,
+        "creditlimit":20000
+    }
+    ]
+}

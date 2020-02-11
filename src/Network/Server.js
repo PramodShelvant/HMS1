@@ -1,6 +1,6 @@
-const Getdata=async()=>{
+const Getdata=async(url='')=>{
     try{
-     const response= await fetch('https://jsonplaceholder.typicode.com/todos/4')
+     const response= await fetch(url)      
      return await response.json();
       }catch(err){
     console.log(err);

@@ -10,13 +10,13 @@ const sidebarnavitems = (props) => {
   if(typeof(props.items.submenu)==='undefined')
   {
   props.setcol(props.items.col)
-  window.localStorage.setItem('col',props.items.col)
+  window.localStorage.setItem('col',JSON.stringify(props.items.col))
   props.seturl(props.items.url)} 
   
   window.localStorage.setItem('url',props.items.url)
   props.setsidebutton(props.items.sidebtn)
   
-  window.localStorage.setItem('sidebtn',props.items.sidebtn)
+  window.localStorage.setItem('sidebtn',JSON.stringify(props.items.sidebtn))
   }
   return (
     <li className="nav-item has-treeview shadow p-1">

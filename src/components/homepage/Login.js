@@ -4,34 +4,31 @@ import {Postdata} from '../../Network/Server'
 import { ToastContainer, toast } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
 import { useHistory } from 'react-router-dom';
+import * as yup from 'yup'
 
 export default (prop)=>{
 const history=useHistory();
 const formik=useFormik({
  initialValues:{ email:'',
   password:''},
+  validationSchema:()=>
+yup.object().shape({
+  email:yup.string().required(),
+  password:yup.string().required()
+})
+  ,
   onSubmit:values=>{
     alert(JSON.stringify(values));
     Postdata('login','POST',values).then(data=>{
       console.log(data.msg)
       if(data.msg.status==1){
-        if(data.details.role=='admin'){
+        
           toast.success(data.msg.msg, {
           position: toast.POSITION.TOP_CENTER
         });
         window.localStorage.setItem('islogin',true)
-        window.localStorage.setItem('user',data.msg.user);
-        window.location.href='/dashboard'
-      }
-      else {
-        toast.success(data.msg.msg, {
-          position: toast.POSITION.TOP_CENTER
-        });
-        window.localStorage.setItem('islogin',true)
-        window.localStorage.setItem('user',data.msg.user);
-        window.location.href='/patient'
-
-      }
+        window.localStorage.setItem('user',JSON.stringify(data.msg.details));
+        window.location.href='/dashboard/appointment'
       }
       else{
         toast.error(data.msg.msg, {
@@ -57,12 +54,16 @@ return(
           <div className="m-4 p-4 ">
           <div class="form-group d-flex align-items-baseline">
           <i class="fa fa-user " aria-hidden="true"></i>
-         <input type="text" class="form-control  border-top-0 border-left-0  border-right-0 bg-transparent pl-2" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="UserName" onChange={(e)=>formik.setFieldValue('email',e.target.value)}/>
+         <input type="text" class={`form-control  border-top-0 border-left-0  border-right-0 bg-transparent pl-2 ${formik.errors.email?'border-danger':''}`} id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="UserName" onChange={(e)=>formik.setFieldValue('email',e.target.value)}/>
         </div>
+        <span className='text-danger'>{formik.errors.email}</span>
   <div class="form-group d-flex align-items-baseline">
     <i class="fa fa-key " aria-hidden="true"></i>
-     <input type="password" class="form-control border-top-0 border-left-0 border-right-0 bg-transparent pl-2" id="exampleInputPassword1" placeholder="Password" onChange={(e)=>formik.setFieldValue('password',e.target.value)}/>
+     <input type="password" class={`form-control  border-top-0 border-left-0  border-right-0 bg-transparent pl-2 ${formik.errors.password?'border-danger':''}`} id="exampleInputPassword1" placeholder="Password" onChange={(e)=>formik.setFieldValue('password',e.target.value)}/>
+     
   </div>
+  
+  <span className='text-danger'>{formik.errors.password}</span>
   </div>
   <button type="submit" class="btn btn-outline-success w-25 ">Login</button>
 </form>
@@ -74,13 +75,9 @@ return(
 <span class="bg-danger p-1 mr-3"><i class="fab fa-google-plus"></i></span>
 
 </div>
-
       </div>
-      
     </div>
-    
   </div>
-  
 </div>
 </React.Fragment>)
 }

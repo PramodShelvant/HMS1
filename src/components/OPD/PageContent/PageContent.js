@@ -47,16 +47,16 @@ const PageContent = (props) => {
     {
     (props.sidebutton||[]).map((item,i)=>{return (item.type)?<NavLink to={'/dashboard/appointment/'+i} className={item.className } onClick={()=>{
       props.setBreadcrum(item.name)
-      window.localStorage.setItem('name',item.name)
+      window.localStorage.setItem('name',JSON.stringify(item.name))
   props.setcol(item.col)
   
-  window.localStorage.setItem('col',item.col)
+  window.localStorage.setItem('col',JSON.stringify(item.col))
   props.seturl(item.url)
   
   window.localStorage.setItem('url',item.url)
   props.setsidebutton(item.sidebtn)
   
-  window.localStorage.setItem('sidebtn',item.sidebtn)
+  window.localStorage.setItem('sidebtn',JSON.stringify(item.sidebtn))
     }}>{item.name}</NavLink>:<button className={item.className } data-toggle="modal" data-target={item.id}>{item.name}</button>})
     }
   </div>
